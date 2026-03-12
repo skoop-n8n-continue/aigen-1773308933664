@@ -1,0 +1,41 @@
+{
+  "template_id": "qr-vault-crack-001",
+  "name": "Quality Roots — Vault Crack Deal Reveal",
+  "created_at": "2026-03-12T00:00:00.000Z",
+  "version": "1.0.0",
+  "theme": {
+    "style": "dark-botanical-luxury",
+    "description": "Deep forest green vault aesthetic with lime green deal reveals and amber spotlights. Premium dispensary energy meets botanical drama — each product gets a solo spotlight with a visceral price-break animation. The discounted price 'cracks through' the original with a red slash and elastic slam.",
+    "colors": ["#0A1F0F", "#8DC63F", "#F0E8D5", "#D4A843", "#1A4E4A", "#C0392B"],
+    "mood": "confident, premium, dramatic, botanical, hard-edged",
+    "tags": ["dispensary", "cannabis", "deal-reveal", "dark-luxury", "botanical", "quality-roots", "promo"]
+  },
+  "capabilities": {
+    "products_per_cycle": 1,
+    "cycles_through_all_products": true,
+    "required_product_fields": ["name", "price", "discounted_price", "image_url", "brand", "category"],
+    "optional_product_fields": ["strain_type", "lab_thc_value", "lab_thc_unit", "unit_weight", "unit_weight_unit"]
+  },
+  "animation": {
+    "cycle_duration_seconds": 9.2,
+    "fps": 30,
+    "entrance_duration_seconds": 2.9,
+    "idle_duration_seconds": 4.7,
+    "exit_duration_seconds": 1.6,
+    "total_loop_3_products_seconds": 27.6,
+    "uses_plugins": ["SplitText", "DrawSVGPlugin", "ScrambleTextPlugin", "CustomEase", "MotionPathPlugin"]
+  },
+  "assets": {
+    "background": "https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/n8n-continue%2Faigen-1773308933664%2Fassets%2Fbackground-1773309547219.png",
+    "overlays": [
+      "https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/n8n-continue%2Faigen-1773308933664%2Fassets%2Fvine-overlay-1773309569185.png"
+    ],
+    "fonts": ["Bebas Neue", "Oswald", "Barlow Condensed"]
+  },
+  "technical": {
+    "resolution": "1920x1080",
+    "performance": "optimized",
+    "browser_compatibility": "chrome_latest",
+    "rendering": "headless-video"
+  }
+}

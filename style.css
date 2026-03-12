@@ -1,0 +1,570 @@
+/* ============================================================
+   QUALITY ROOTS — VAULT CRACK DEAL REVEAL
+   Video Template 1920×1080 — Non-interactive
+   ============================================================ */
+
+:root {
+  --green-900: #0A1F0F;
+  --green-800: #0F2A15;
+  --green-700: #1B4425;
+  --green-600: #1E4D29;
+  --lime: #8DC63F;
+  --lime-dark: #6FA832;
+  --lime-glow: rgba(141, 198, 63, 0.55);
+  --cream: #F0E8D5;
+  --amber: #D4A843;
+  --red-slash: #C0392B;
+  --sage: #A8C48A;
+  --teal-dark: #1A4E4A;
+  --ticker-bg: #061209;
+  --white: #FFFFFF;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  overflow: hidden;
+  background: #0A1F0F;
+}
+
+/* ============================================================
+   SCENE CONTAINER
+   ============================================================ */
+
+#scene {
+  width: 1920px;
+  height: 1080px;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Barlow Condensed', 'Impact', sans-serif;
+}
+
+/* ============================================================
+   BACKGROUND LAYERS
+   ============================================================ */
+
+#background {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://skoop-dev-code-agent.s3.us-east-1.amazonaws.com/n8n-continue%2Faigen-1773308933664%2Fassets%2Fbackground-1773309547219.png');
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+  transform-origin: center center;
+}
+
+#color-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(10, 31, 15, 0.72) 0%,
+    rgba(10, 31, 15, 0.40) 40%,
+    rgba(10, 31, 15, 0.68) 75%,
+    rgba(10, 31, 15, 0.88) 100%
+  );
+  z-index: 2;
+}
+
+#vine-overlay-img {
+  position: absolute;
+  inset: 0;
+  width: 1920px;
+  height: 1080px;
+  z-index: 4;
+  opacity: 0.18;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+#vine-layer {
+  position: absolute;
+  inset: 0;
+  width: 1920px;
+  height: 1080px;
+  z-index: 6;
+  pointer-events: none;
+}
+
+#vine-layer path {
+  stroke: #8DC63F;
+  stroke-width: 1.8;
+  fill: none;
+  opacity: 0.5;
+}
+
+/* ============================================================
+   SCAN LINE OVERLAY (atmosphere)
+   ============================================================ */
+
+#scan-lines {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 0, 0, 0.04) 3px,
+    rgba(0, 0, 0, 0.04) 4px
+  );
+}
+
+/* ============================================================
+   PRODUCTS CONTAINER
+   ============================================================ */
+
+#products-container {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+}
+
+/* ============================================================
+   PRODUCT LAYOUT
+   ============================================================ */
+
+.product {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: row;
+  width: 1920px;
+  height: 1026px; /* leaves 54px for ticker */
+  opacity: 1;
+}
+
+/* LEFT PANEL — info/pricing */
+.product-left {
+  width: 960px;
+  height: 1026px;
+  padding: 90px 60px 70px 110px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* RIGHT PANEL — product showcase */
+.product-right {
+  width: 960px;
+  height: 1026px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* Vertical divider line between panels */
+.product-divider {
+  position: absolute;
+  left: 960px;
+  top: 60px;
+  width: 2px;
+  height: 906px;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(141, 198, 63, 0.35) 15%,
+    rgba(141, 198, 63, 0.35) 85%,
+    transparent 100%
+  );
+  z-index: 11;
+  opacity: 0;
+}
+
+/* ============================================================
+   LEFT PANEL — TYPOGRAPHY ELEMENTS
+   ============================================================ */
+
+.product-category {
+  display: inline-block;
+  align-self: flex-start;
+  background: rgba(141, 198, 63, 0.12);
+  border: 1px solid rgba(141, 198, 63, 0.55);
+  padding: 5px 18px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--lime);
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  line-height: 1;
+  margin-bottom: 16px;
+  opacity: 0;
+}
+
+.product-brand {
+  font-family: 'Bebas Neue', 'Impact', sans-serif;
+  font-size: 88px;
+  font-weight: 400;
+  color: var(--cream);
+  letter-spacing: 0.02em;
+  line-height: 0.88;
+  margin-bottom: 12px;
+  opacity: 0;
+}
+
+.product-name {
+  font-family: 'Oswald', sans-serif;
+  font-size: 38px;
+  font-weight: 600;
+  color: var(--cream);
+  line-height: 1.18;
+  max-width: 740px;
+  margin-bottom: 24px;
+  opacity: 0;
+}
+
+.product-name .word {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.product-strain {
+  display: inline-block;
+  align-self: flex-start;
+  background: var(--teal-dark);
+  padding: 5px 18px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--lime);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  margin-bottom: 40px;
+  opacity: 0;
+}
+
+.price-section-divider {
+  width: 110px;
+  height: 2px;
+  background: rgba(141, 198, 63, 0.45);
+  margin-bottom: 24px;
+  opacity: 0;
+}
+
+/* WAS block */
+.was-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--sage);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin-bottom: 2px;
+  opacity: 0;
+}
+
+.original-price-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 18px;
+  align-self: flex-start;
+}
+
+.original-price {
+  font-family: 'Bebas Neue', 'Impact', sans-serif;
+  font-size: 92px;
+  font-weight: 400;
+  color: var(--cream);
+  opacity: 0.72;
+  display: block;
+  letter-spacing: 0.01em;
+  line-height: 0.9;
+}
+
+.price-slash-svg {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  right: -20px;
+  bottom: -10px;
+  width: calc(100% + 30px);
+  height: calc(100% + 20px);
+  overflow: visible;
+  pointer-events: none;
+}
+
+/* NOW block */
+.now-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--lime);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  margin-bottom: 0px;
+  opacity: 0;
+}
+
+.discounted-price {
+  font-family: 'Bebas Neue', 'Impact', sans-serif;
+  font-size: 182px;
+  font-weight: 400;
+  color: var(--lime);
+  letter-spacing: 0.01em;
+  line-height: 0.82;
+  opacity: 0;
+  text-shadow:
+    0 0 80px rgba(141, 198, 63, 0.6),
+    0 0 30px rgba(141, 198, 63, 0.4),
+    0 0 8px rgba(141, 198, 63, 0.25);
+  margin-bottom: 22px;
+}
+
+.thc-info {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--sage);
+  letter-spacing: 0.06em;
+  opacity: 0;
+  margin-top: 8px;
+}
+
+.qr-watermark-text {
+  position: absolute;
+  bottom: 85px;
+  left: 110px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  color: var(--cream);
+  opacity: 0.28;
+  letter-spacing: 0.38em;
+  pointer-events: none;
+}
+
+/* ============================================================
+   RIGHT PANEL — PRODUCT SHOWCASE
+   ============================================================ */
+
+.product-image-wrapper {
+  width: 560px;
+  height: 560px;
+  position: relative;
+  opacity: 0;
+}
+
+.product-spotlight {
+  position: absolute;
+  inset: -80px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at center,
+    rgba(212, 168, 67, 0.22) 0%,
+    rgba(141, 198, 63, 0.05) 45%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.75)) drop-shadow(0 8px 20px rgba(0,0,0,0.5));
+  position: relative;
+  z-index: 1;
+}
+
+.hex-frame {
+  position: absolute;
+  top: -38px;
+  left: -38px;
+  width: 636px;
+  height: 636px;
+  overflow: visible;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Savings badge */
+.savings-badge {
+  position: absolute;
+  top: -22px;
+  right: -60px;
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  background: var(--amber);
+  border: 3.5px solid var(--green-900);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.6),
+    0 0 0 4px rgba(141, 198, 63, 0.45),
+    0 0 30px rgba(212, 168, 67, 0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: rotate(12deg);
+  opacity: 0;
+  z-index: 3;
+}
+
+.savings-pct {
+  font-family: 'Bebas Neue', 'Impact', sans-serif;
+  font-size: 40px;
+  color: var(--green-900);
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.savings-off {
+  font-family: 'Bebas Neue', 'Impact', sans-serif;
+  font-size: 23px;
+  color: var(--green-900);
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+/* ============================================================
+   RIPPLE SVG (exit transition)
+   ============================================================ */
+
+#ripple-svg {
+  position: absolute;
+  inset: 0;
+  width: 1920px;
+  height: 1080px;
+  z-index: 20;
+  pointer-events: none;
+}
+
+/* ============================================================
+   CORNER BRACKETS (persistent)
+   ============================================================ */
+
+#corner-brackets {
+  position: absolute;
+  inset: 0;
+  width: 1920px;
+  height: 1080px;
+  z-index: 25;
+  pointer-events: none;
+}
+
+/* ============================================================
+   BRAND WATERMARK (top-left, persistent)
+   ============================================================ */
+
+#brand-watermark {
+  position: absolute;
+  top: 28px;
+  left: 28px;
+  z-index: 32;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.qr-hex-icon {
+  width: 46px;
+  height: 46px;
+  flex-shrink: 0;
+}
+
+.watermark-text {
+  font-family: 'Bebas Neue', 'Impact', sans-serif;
+  font-size: 26px;
+  color: var(--cream);
+  opacity: 0.7;
+  letter-spacing: 0.28em;
+}
+
+/* ============================================================
+   TICKER STRIP
+   ============================================================ */
+
+#ticker {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 1920px;
+  height: 54px;
+  background: var(--ticker-bg);
+  border-top: 2px solid rgba(141, 198, 63, 0.45);
+  overflow: hidden;
+  z-index: 30;
+}
+
+.ticker-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.ticker-inner {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: rgba(240, 232, 213, 0.85);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.ticker-inner .sep {
+  color: var(--lime);
+  margin: 0 18px;
+  font-size: 16px;
+}
+
+/* ============================================================
+   FLASH OVERLAY (for price reveal flash)
+   ============================================================ */
+
+#flash-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 18;
+  pointer-events: none;
+  background: rgba(141, 198, 63, 0);
+}
+
+/* ============================================================
+   GEOMETRIC ACCENT LINES (SVG injected per cycle)
+   ============================================================ */
+
+.geo-accents {
+  position: absolute;
+  inset: 0;
+  width: 1920px;
+  height: 1080px;
+  pointer-events: none;
+  z-index: 11;
+  opacity: 0;
+}
+
+/* ============================================================
+   PRODUCT PANEL BG GLOW (subtle left panel atmosphere)
+   ============================================================ */
+
+.panel-glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 960px;
+  height: 1026px;
+  background: radial-gradient(
+    ellipse 600px 700px at 20% 60%,
+    rgba(141, 198, 63, 0.04) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
