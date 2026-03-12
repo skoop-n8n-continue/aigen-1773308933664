@@ -1,0 +1,63 @@
+{
+  "products": [
+    {
+      "id": "3452466",
+      "name": "Savvy Blue Magic Guap Gummy 25mg 1-Pack",
+      "online_title": "Savvy Blue Magic Guap Gummy 25mg 1-Pack",
+      "brand": "Savvy",
+      "vendor": "Verano",
+      "category": "Gummies",
+      "strain": "Indica",
+      "strain_type": "Indica",
+      "price": "$7.00",
+      "discounted_price": "$3.50",
+      "image_url": "https://skoop-general.s3.us-east-1.amazonaws.com/n8n_image_gen%2Fundefined-1773196700024.png",
+      "lab_thc_value": 2.48,
+      "lab_thc_unit": "mg",
+      "unit_weight": "1",
+      "unit_weight_unit": "g",
+      "quantity": 13,
+      "meta": "Indica | 2.48mg THC | 1g"
+    },
+    {
+      "id": "3465870",
+      "name": "Lost Farm Juicy Peach x GSC Sherbet Live Resin Gummies 10mg x 10-Pack",
+      "online_title": "Lost Farm Juicy Peach x GSC Sherbet Live Resin Gummies 10mg x 10-Pack",
+      "brand": "Lost Farm",
+      "vendor": "Garden Society",
+      "category": "Gummies",
+      "strain": "Hybrid",
+      "strain_type": "Hybrid",
+      "price": "$30.00",
+      "discounted_price": "$15.00",
+      "image_url": "https://skoop-general.s3.us-east-1.amazonaws.com/n8n_image_gen%2Fundefined-1773196879298.png",
+      "lab_thc_value": 2.27,
+      "lab_thc_unit": "mg",
+      "unit_weight": "1",
+      "unit_weight_unit": "g",
+      "quantity": 8,
+      "meta": "Hybrid | 10mg THC x 10 | Live Resin"
+    },
+    {
+      "id": "3475123",
+      "name": "Orange Malt Flower 7g",
+      "online_title": "Orange Malt Flower 7g",
+      "brand": "URBNJ",
+      "vendor": "LoveGrow Company, LLC",
+      "category": "Whole Flower",
+      "strain": "Hybrid",
+      "strain_type": "Hybrid",
+      "price": "$65.00",
+      "discounted_price": "$32.50",
+      "image_url": "https://leaflogixmedia.blob.core.windows.net/product-image/ce1aabe2-d086-4462-91ad-8f70ef4c5913.jpg",
+      "lab_thc_value": 26.19,
+      "lab_thc_unit": "%",
+      "lab_thca_value": 28.06,
+      "lab_thca_unit": "%",
+      "unit_weight": "7",
+      "unit_weight_unit": "g",
+      "quantity": 1,
+      "meta": "Hybrid | 26.19% THC | 7g"
+    }
+  ]
+}
