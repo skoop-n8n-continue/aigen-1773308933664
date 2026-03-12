@@ -94,11 +94,26 @@ function killLivingTweens() {
 // ─── Product Loading ──────────────────────────────────────────
 
 async function loadProducts() {
+  // 1. Check for injected global (rendering system injects window.PRODUCTS_DATA)
+  if (window.PRODUCTS_DATA && Array.isArray(window.PRODUCTS_DATA.products)) {
+    PRODUCTS = window.PRODUCTS_DATA.products;
+    initPersistentAnimations();
+    startCycle();
+    return;
+  }
+  if (window.PRODUCTS_DATA && Array.isArray(window.PRODUCTS_DATA)) {
+    PRODUCTS = window.PRODUCTS_DATA;
+    initPersistentAnimations();
+    startCycle();
+    return;
+  }
+
+  // 2. Fall back to fetching products.json
   try {
     const resp = await fetch('./products.json', { cache: 'no-store' });
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
     const data = await resp.json();
-    PRODUCTS = Array.isArray(data.products) ? data.products : [];
+    PRODUCTS = Array.isArray(data.products) ? data.products : (Array.isArray(data) ? data : []);
   } catch (err) {
     console.warn('[QR Template] Could not load products.json:', err.message);
     PRODUCTS = [];
