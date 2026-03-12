@@ -93,31 +93,79 @@ function killLivingTweens() {
 
 // ─── Product Loading ──────────────────────────────────────────
 
-async function loadProducts() {
-  // 1. Check for injected global (rendering system injects window.PRODUCTS_DATA)
-  if (window.PRODUCTS_DATA && Array.isArray(window.PRODUCTS_DATA.products)) {
-    PRODUCTS = window.PRODUCTS_DATA.products;
-    initPersistentAnimations();
-    startCycle();
-    return;
+/**
+ * Resolve products from any known injection pattern.
+ * Returns the products array if found, otherwise null.
+ */
+function resolveProductsFromGlobals() {
+  const keys = [
+    'PRODUCTS_DATA', 'products', 'templateData', 'TEMPLATE_DATA',
+    'productData', 'PRODUCT_DATA', 'templateProducts', 'pageData',
+    'renderData', 'RENDER_DATA', 'appData', 'APP_DATA'
+  ];
+  for (const key of keys) {
+    const val = window[key];
+    if (!val) continue;
+    if (Array.isArray(val) && val.length > 0) return val;
+    if (val && Array.isArray(val.products) && val.products.length > 0) return val.products;
+    if (val && Array.isArray(val.items) && val.items.length > 0) return val.items;
   }
-  if (window.PRODUCTS_DATA && Array.isArray(window.PRODUCTS_DATA)) {
-    PRODUCTS = window.PRODUCTS_DATA;
+  return null;
+}
+
+/**
+ * Poll window globals for up to `maxMs` milliseconds.
+ * Resolves with the products array or null on timeout.
+ */
+function pollGlobals(maxMs) {
+  return new Promise(resolve => {
+    const deadline = Date.now() + maxMs;
+    (function check() {
+      const found = resolveProductsFromGlobals();
+      if (found) return resolve(found);
+      if (Date.now() >= deadline) return resolve(null);
+      setTimeout(check, 50);
+    })();
+  });
+}
+
+async function loadProducts() {
+  // 1. Immediate check — renderer may have set a global synchronously
+  const immediate = resolveProductsFromGlobals();
+  if (immediate) {
+    PRODUCTS = immediate;
     initPersistentAnimations();
     startCycle();
     return;
   }
 
-  // 2. Fall back to fetching products.json
-  try {
-    const resp = await fetch('./products.json', { cache: 'no-store' });
-    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-    const data = await resp.json();
-    PRODUCTS = Array.isArray(data.products) ? data.products : (Array.isArray(data) ? data : []);
-  } catch (err) {
-    console.warn('[QR Template] Could not load products.json:', err.message);
-    PRODUCTS = [];
+  // 2. Poll for up to 800ms (handles async injection before DOMContentLoaded)
+  const polled = await pollGlobals(800);
+  if (polled) {
+    PRODUCTS = polled;
+    initPersistentAnimations();
+    startCycle();
+    return;
   }
+
+  // 3. Try fetching products.json at multiple paths (silent — 403/404 is expected in some renderers)
+  const paths = ['./products.json', '/products.json', 'products.json'];
+  for (const path of paths) {
+    try {
+      const resp = await fetch(path, { cache: 'no-store' });
+      if (!resp.ok) continue;
+      const data = await resp.json();
+      const list = Array.isArray(data.products) ? data.products
+                 : Array.isArray(data.items)    ? data.items
+                 : Array.isArray(data)           ? data
+                 : null;
+      if (list && list.length > 0) {
+        PRODUCTS = list;
+        break;
+      }
+    } catch (_) { /* silent */ }
+  }
+
   initPersistentAnimations();
   startCycle();
 }
